@@ -1,15 +1,16 @@
 @extends('layouts.basic')
  
 @section('content')
+
 <div class="container mt-3">
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left text-center">
                 <h2 class="font-weight-light">Liste des utilisateurs</h2>
             </div>
-            <div class="pull-right">
+            {{-- <div class="pull-right">
                 <a class="btn btn-outline-success" href="{{ route('users.create') }}">Ajouter un utilisateur</a>
-            </div>
+            </div> --}}
         </div>
     </div>
    
@@ -24,6 +25,7 @@
             <th>No</th>
             <th>Name</th>
             <th>Email</th>
+            <th>Fonction</th>
             <th width="280px">Action</th>
         </tr>
         @foreach ($users as $user)
@@ -31,16 +33,10 @@
             <td>{{ $user->id }}</td>
             <td>{{ $user->name }}</td>
             <td>{{ $user->email }}</td>
+            <td>{{ App\Type::find($user->type_id)->name  ?? ''}}</td>
             <td>
                 <form action="{{ route('users.destroy',$user->id) }}" method="POST">
    
-                    <a class="btn btn-primary btn-sm" href="{{ route('users.show',$user->id) }}">
-                        <svg class="bi bi-eye" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.134 13.134 0 001.66 2.043C4.12 11.332 5.88 12.5 8 12.5c2.12 0 3.879-1.168 5.168-2.457A13.134 13.134 0 0014.828 8a13.133 13.133 0 00-1.66-2.043C11.879 4.668 10.119 3.5 8 3.5c-2.12 0-3.879 1.168-5.168 2.457A13.133 13.133 0 001.172 8z" clip-rule="evenodd"/>
-                            <path fill-rule="evenodd" d="M8 5.5a2.5 2.5 0 100 5 2.5 2.5 0 000-5zM4.5 8a3.5 3.5 0 117 0 3.5 3.5 0 01-7 0z" clip-rule="evenodd"/>
-                        </svg>
-                    </a>
-    
                     <a class="btn btn-warning btn-sm" href="{{ route('users.edit',$user->id) }}">
                         <svg class="bi bi-pencil" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" d="M11.293 1.293a1 1 0 011.414 0l2 2a1 1 0 010 1.414l-9 9a1 1 0 01-.39.242l-3 1a1 1 0 01-1.266-1.265l1-3a1 1 0 01.242-.391l9-9zM12 2l2 2-9 9-3 1 1-3 9-9z" clip-rule="evenodd"/>
